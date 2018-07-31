@@ -21,5 +21,4 @@ public class AppTest {
     public void aPointlessTest() {
         Assert.assertEquals("Expectations met", "successful", successLabel);
     }
-
 }

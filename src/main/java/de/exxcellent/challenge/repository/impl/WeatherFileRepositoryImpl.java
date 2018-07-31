@@ -15,6 +15,16 @@ import java.util.List;
  */
 public class WeatherFileRepositoryImpl implements IWeatherRepository {
 
+    private String fileName;
+    private String encodingFormat;
+    private String delimiter;
+
+    public WeatherFileRepositoryImpl(String pFileName, String pEncodingFormat, String pDelimiter) {
+        this.fileName = pFileName;
+        this.encodingFormat = pEncodingFormat;
+        this.delimiter = pDelimiter;
+    }
+    
     @Override
     public List<DailyWeather> findAllWeatherData() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

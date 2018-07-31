@@ -11,4 +11,50 @@ package de.exxcellent.challenge.domain.weather.model;
  */
 public class DailyWeather {
     
+    private String day;
+    private Integer maxTemperature;
+    private Integer minTemperature;
+    private Integer temperatureSpread;
+
+    public DailyWeather(String pDay, Integer pMaxTemperature, Integer pMminTemperature) {
+        this.day = pDay;
+        this.maxTemperature = pMaxTemperature;
+        this.minTemperature = pMminTemperature;
+        this.temperatureSpread = this.maxTemperature - this.minTemperature;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public Integer getMaxTemperature() {
+        return maxTemperature;
+    }
+
+    public void setMaxTemperature(Integer maxTemperature) {
+        this.maxTemperature = maxTemperature;
+    }
+
+    public Integer getMinTemperature() {
+        return minTemperature;
+    }
+
+    public void setMinTemperature(Integer minTemperature) {
+        this.minTemperature = minTemperature;
+    }
+
+    public Integer getTemperatureSpread() {
+        if(temperatureSpread == null) {
+            temperatureSpread = this.maxTemperature - this.minTemperature;
+        }
+        return temperatureSpread;
+    }
+
+    public void setTemperatureSpread(Integer temperatureSpread) {
+        this.temperatureSpread = temperatureSpread;
+    }
 }
