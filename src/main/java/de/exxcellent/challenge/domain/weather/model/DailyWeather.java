@@ -18,10 +18,28 @@ public class DailyWeather {
     private Integer minTemperature;
     private Integer temperatureSpread;
 
-    public DailyWeather(String pDay, Integer pMaxTemperature, Integer pMminTemperature) throws WeatherDomainException {
+    public DailyWeather(String pDay, Integer pMaxTemperature, Integer pMinTemperature) throws WeatherDomainException {
+        
+        if(pDay == null) {
+            throw new WeatherDomainException("Daily weather parameter 'day' is null");
+        }
+        
+        if(pMaxTemperature == null) {
+            throw new WeatherDomainException("Daily weather parameter 'max temperature' is null");
+        }
+        
+        if(pMinTemperature == null) {
+            throw new WeatherDomainException("Daily weather parameter 'min temeperature' is null");
+        }
+        
+        if(pMinTemperature > pMaxTemperature) {
+            throw new WeatherDomainException("Daily weather parameter 'min temeperature' is greater then parameter 'max temperature'");
+        }
+        
         this.day = pDay;
         this.maxTemperature = pMaxTemperature;
-        this.minTemperature = pMminTemperature;
+        this.minTemperature = pMinTemperature;
+        //compute temperature spread... 
         this.temperatureSpread = this.maxTemperature - this.minTemperature;
     }
 
