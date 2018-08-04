@@ -1,0 +1,81 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package de.exxcellent.challenge.repository;
+
+import de.exxcellent.challenge.domain.weather.IWeatherRepository;
+import de.exxcellent.challenge.domain.weather.model.DailyWeather;
+import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ *
+ * @author c.kaddatz
+ */
+public class WeatherRepositoryTest {
+    
+    private static final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
+    private static final String ENCODING_FORMAT = "UTF-8";
+    private static final String CSV_DELIMITER = ",";
+    
+    private IWeatherRepository weatherRepository;
+    private List<DailyWeather> expectedWeatherResultList;
+    
+    @Before
+    public void init() {
+        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
+        
+        //prepare a randomly test
+        expectedWeatherResultList = new ArrayList<>(
+                Arrays.asList(
+                        new DailyWeather("3",77,55),
+                        new DailyWeather("15",64,55),
+                        new DailyWeather("28",84,68)));
+    }
+    
+    @Test //TODO Exception handling
+    public void testFileRepositoryFindAllWeatherData() {
+        List<DailyWeather> actualWeatherList = weatherRepository.findAllWeatherData();
+        Assert.assertNotNull(actualWeatherList);
+        Assert.assertTrue(actualWeatherList.size()==30);
+        
+        //do check expected result
+        expectedWeatherResultList.forEach(expectedWeather -> {
+            actualWeatherList.forEach(actualWeather -> {
+                if(actualWeather.getDay().equals(expectedWeather.getDay())) {
+                    Assert.assertEquals(expectedWeather.getDay(), actualWeather.getDay());
+                    Assert.assertEquals(expectedWeather.getMaxTemperature(), actualWeather.getMaxTemperature());
+                    Assert.assertEquals(expectedWeather.getMinTemperature(), actualWeather.getMinTemperature());
+                    Assert.assertEquals(expectedWeather.getTemperatureSpread(), actualWeather.getTemperatureSpread());
+                }
+            });
+        });
+    }
+    
+    @Test //TODO Exception handling
+    public void testFileRepositoryFileIsNull() {
+        weatherRepository =  new WeatherFileRepositoryImpl(null,ENCODING_FORMAT,CSV_DELIMITER);
+        testFileRepositoryFindAllWeatherData();
+    }
+    
+    @Test //TODO Exception handling
+    public void testFileRepositoryFileNotFound() {
+        final String WEATHER_CSV_WRONG_FILE_NAME = "de/exxcellent/challenge/test.csv";
+        weatherRepository =  new WeatherFileRepositoryImpl(WEATHER_CSV_WRONG_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
+        testFileRepositoryFindAllWeatherData();
+    }
+    
+    @Test //TODO Exception handling
+    public void testFileRepositorWrongDelimiter() {
+        final String WRONG_CSV_DELIMITER = ";";
+        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,WRONG_CSV_DELIMITER);
+        testFileRepositoryFindAllWeatherData();
+    }
+}

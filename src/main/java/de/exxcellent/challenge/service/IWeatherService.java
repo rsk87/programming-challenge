@@ -5,13 +5,15 @@
  */
 package de.exxcellent.challenge.service;
 
-import de.exxcellent.challenge.domain.weather.model.DailyWeather;
-
 /**
  *
  * @author c.kaddatz
  */
 public interface IWeatherService {
 
-    public DailyWeather getDayWithSmallestTempSpread();
+    /**
+     * 
+     * @return day with smallest temperature as string 
+     */
+    public String getDayWithSmallestTempSpread();
 }

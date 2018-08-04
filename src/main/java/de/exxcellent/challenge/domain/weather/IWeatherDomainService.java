@@ -14,5 +14,10 @@ import java.util.List;
  */
 public interface IWeatherDomainService {
     
+    /**
+     * Returns the daily weather object with the smallest temperature spread from the given list
+     * @param dailyWeatherList
+     * @return 
+     */
     public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList);
 }

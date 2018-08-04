@@ -8,7 +8,6 @@ package de.exxcellent.challenge.service.impl;
 import de.exxcellent.challenge.domain.weather.IWeatherDomainService;
 import de.exxcellent.challenge.domain.weather.IWeatherRepository;
 import de.exxcellent.challenge.domain.weather.impl.WeatherDomainServiceImpl;
-import de.exxcellent.challenge.domain.weather.model.DailyWeather;
 import de.exxcellent.challenge.service.IWeatherService;
 
 /**
@@ -25,9 +24,9 @@ public class WeatherServiceImpl implements IWeatherService {
         this.weatherRepository = weatherRepository;
         this.weatherDomainService = new WeatherDomainServiceImpl(weatherRepository);
     }
-    
+
     @Override
-    public DailyWeather getDayWithSmallestTempSpread() {
+    public String getDayWithSmallestTempSpread() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
