@@ -63,19 +63,31 @@ public class WeatherRepositoryTest {
     
     @Test(expected = WeatherRepositoryException.class)
     public void testFileRepositoryFileIsNull() throws WeatherRepositoryException {
-        weatherRepository =  new WeatherFileRepositoryImpl(null,ENCODING_FORMAT,CSV_DELIMITER);
-        testFileRepositoryFindAllWeatherData();
+        weatherRepository =  new WeatherFileRepositoryImpl(null);
     }
     
     @Test(expected = WeatherRepositoryException.class)
     public void testFileRepositoryFileNotFound() throws WeatherRepositoryException {
         final String WEATHER_CSV_WRONG_FILE_NAME = "de/exxcellent/challenge/test.csv";
-        weatherRepository =  new WeatherFileRepositoryImpl(WEATHER_CSV_WRONG_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
+        weatherRepository =  new WeatherFileRepositoryImpl(WEATHER_CSV_WRONG_FILE_NAME);
         testFileRepositoryFindAllWeatherData();
     }
     
+    @Test
+    public void testFileRepositoryOptionalParameter() throws WeatherRepositoryException {
+        IWeatherRepository expectedWeatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
+        
+        //test encoding and delimiter as parameter value
+        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
+        Assert.assertEquals(weatherRepository, expectedWeatherRepository);
+        
+        //test encoding and delimiter as default value
+        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME);
+        Assert.assertEquals(weatherRepository, expectedWeatherRepository);
+    }
+    
     @Test(expected = WeatherRepositoryException.class)
-    public void testFileRepositorWrongDelimiter() throws WeatherRepositoryException {
+    public void testFileRepositorWrongFileDelimiter() throws WeatherRepositoryException {
         final String WRONG_CSV_DELIMITER = ";";
         weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,WRONG_CSV_DELIMITER);
         testFileRepositoryFindAllWeatherData();

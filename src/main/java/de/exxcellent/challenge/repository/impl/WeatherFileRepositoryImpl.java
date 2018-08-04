@@ -15,18 +15,30 @@ import java.util.List;
  * @author c.kaddatz
  */
 public class WeatherFileRepositoryImpl implements IWeatherRepository {
-
+    
     private String fileName;
     private String encodingFormat;
     private String delimiter;
 
     /**
      * @param pFileName csv file name
-     * @param pEncodingFormat data encoding format
-     * @param pDelimiter csv delimiter
+     * @throws de.exxcellent.challenge.repository.exception.WeatherRepositoryException
+     */
+    public WeatherFileRepositoryImpl(String pFileName) throws WeatherRepositoryException {
+      
+        this.fileName = pFileName;
+        this.encodingFormat = null;
+        this.delimiter = null;
+    }
+    
+    /**
+     * @param pFileName csv file name
+     * @param pEncodingFormat data encoding format (optional)
+     * @param pDelimiter csv delimiter (optional)
      * @throws de.exxcellent.challenge.repository.exception.WeatherRepositoryException
      */
     public WeatherFileRepositoryImpl(String pFileName, String pEncodingFormat, String pDelimiter) throws WeatherRepositoryException {
+        
         this.fileName = pFileName;
         this.encodingFormat = pEncodingFormat;
         this.delimiter = pDelimiter;
