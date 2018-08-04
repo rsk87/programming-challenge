@@ -7,6 +7,7 @@ package de.exxcellent.challenge.repository.impl;
 
 import de.exxcellent.challenge.domain.weather.IWeatherRepository;
 import de.exxcellent.challenge.domain.weather.model.DailyWeather;
+import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
 import java.util.List;
 
 /**
@@ -23,8 +24,9 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
      * @param pFileName csv file name
      * @param pEncodingFormat data encoding format
      * @param pDelimiter csv delimiter
+     * @throws de.exxcellent.challenge.repository.exception.WeatherRepositoryException
      */
-    public WeatherFileRepositoryImpl(String pFileName, String pEncodingFormat, String pDelimiter) {
+    public WeatherFileRepositoryImpl(String pFileName, String pEncodingFormat, String pDelimiter) throws WeatherRepositoryException {
         this.fileName = pFileName;
         this.encodingFormat = pEncodingFormat;
         this.delimiter = pDelimiter;
@@ -35,7 +37,7 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
      * @return a list from mapped daily weather data
      */
     @Override
-    public List<DailyWeather> findAllWeatherData() {
+    public List<DailyWeather> findAllWeatherData() throws WeatherRepositoryException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

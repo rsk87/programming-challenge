@@ -5,8 +5,10 @@
  */
 package de.exxcellent.challenge.domain.weather;
 
+import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.weather.impl.WeatherDomainServiceImpl;
 import de.exxcellent.challenge.domain.weather.model.DailyWeather;
+import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,16 +26,16 @@ public class WeatherDomainTest {
     private DailyWeather dailyWeather;
     
     @Before
-    public void init() {
+    public void init() throws WeatherRepositoryException {
         weatherDomainService = new WeatherDomainServiceImpl(new WeatherFileRepositoryImpl(null,null,null));
     }
     
-    private DailyWeather createDailyWeather(String day, Integer mxt, Integer min) {
+    private DailyWeather createDailyWeather(String day, Integer mxt, Integer min) throws WeatherDomainException {
         return new DailyWeather(day,mxt,min);
     }
     
     @Test
-    public void testBaseConstruction() {
+    public void testBaseConstruction() throws WeatherDomainException {
         dailyWeather = createDailyWeather("15",30,15);
         Assert.assertEquals("15", dailyWeather.getDay());
         Assert.assertEquals(new Integer(30), dailyWeather.getMaxTemperature());
@@ -41,28 +43,28 @@ public class WeatherDomainTest {
         Assert.assertEquals(new Integer(15), dailyWeather.getTemperatureSpread());
     }
         
-    @Test //TODO Exception Handling
-    public void testMinValueGreaterThenMaxValue() {
+    @Test(expected = WeatherDomainException.class)
+    public void testMinValueGreaterThenMaxValue() throws WeatherDomainException {
         dailyWeather = createDailyWeather("17",15,30);
     }
     
-    @Test //TODO Exception Handling
-    public void testMaxValueIsNull() {
+    @Test(expected = WeatherDomainException.class)
+    public void testMaxValueIsNull() throws WeatherDomainException {
         dailyWeather = createDailyWeather("17",null,15);
     }
     
-    @Test //TODO Exception Handling
-    public void testMinValueIsNull() {
+    @Test(expected = WeatherDomainException.class)
+    public void testMinValueIsNull() throws WeatherDomainException {
         dailyWeather = createDailyWeather("17",30,null);
     }
     
-    @Test //TODO Exception Handling
-    public void testDayIsNull() {
+    @Test(expected = WeatherDomainException.class)
+    public void testDayIsNull() throws WeatherDomainException {
         dailyWeather = createDailyWeather(null,30,15);
     }
     
     @Test
-    public void testDayWithSmallestTempSpread() {
+    public void testDayWithSmallestTempSpread() throws WeatherDomainException, WeatherDomainException {
         DailyWeather expectedResult = new DailyWeather("15",20,20);
         List<DailyWeather> actualeList = new ArrayList<>();
         actualeList.add(new DailyWeather("15",34,20));
@@ -73,8 +75,8 @@ public class WeatherDomainTest {
         Assert.assertEquals(expectedResult, weatherDomainService.getDayWithSmallestTempSpread(actualeList));
     }
     
-    @Test //TODO Exxception Handling
-    public void testGetDayWithSmallestTempSpreadEmptyList() {
+    @Test(expected = WeatherDomainException.class)
+    public void testGetDayWithSmallestTempSpreadEmptyList() throws WeatherDomainException {
         List<DailyWeather> actualeList = new ArrayList<>();
         weatherDomainService.getDayWithSmallestTempSpread(actualeList);
     }

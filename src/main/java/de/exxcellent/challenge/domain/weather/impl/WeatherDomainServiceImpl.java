@@ -7,6 +7,7 @@ package de.exxcellent.challenge.domain.weather.impl;
 
 import de.exxcellent.challenge.domain.weather.IWeatherDomainService;
 import de.exxcellent.challenge.domain.weather.IWeatherRepository;
+import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.weather.model.DailyWeather;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class WeatherDomainServiceImpl implements IWeatherDomainService {
     }
     
     @Override
-    public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList) {
+    public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList) throws WeatherDomainException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

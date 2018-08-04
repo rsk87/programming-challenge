@@ -5,6 +5,8 @@
  */
 package de.exxcellent.challenge.domain.weather.model;
 
+import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
+
 /**
  *
  * @author c.kaddatz
@@ -16,7 +18,7 @@ public class DailyWeather {
     private Integer minTemperature;
     private Integer temperatureSpread;
 
-    public DailyWeather(String pDay, Integer pMaxTemperature, Integer pMminTemperature) {
+    public DailyWeather(String pDay, Integer pMaxTemperature, Integer pMminTemperature) throws WeatherDomainException {
         this.day = pDay;
         this.maxTemperature = pMaxTemperature;
         this.minTemperature = pMminTemperature;

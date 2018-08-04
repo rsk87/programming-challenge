@@ -5,6 +5,7 @@
  */
 package de.exxcellent.challenge.service;
 
+import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import de.exxcellent.challenge.service.impl.WeatherServiceImpl;
 import org.junit.Assert;
@@ -22,7 +23,7 @@ public class FullApplicationTest {
     private String expectedResult;
     
     @Before
-    public void init() {
+    public void init() throws WeatherRepositoryException {
         final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
         final String DEFAULT_ENCODING_FORMAT = "UTF-8";
         final String DEFAULT_CSV_DELIMITER = ",";

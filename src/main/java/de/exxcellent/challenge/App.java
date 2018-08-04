@@ -1,5 +1,6 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import de.exxcellent.challenge.service.IWeatherService;
 import de.exxcellent.challenge.service.impl.WeatherServiceImpl;
@@ -16,7 +17,7 @@ public final class App {
     private static final String DEFAULT_ENCODING_FORMAT = "";
     private static final String DEFAULT_CSV_DELIMITER = "";
 
-    public static void main(String... args) {
+    public static void main(String... args) throws WeatherRepositoryException {
         
         IWeatherService weatherService = new WeatherServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_ENCODING_FORMAT, DEFAULT_CSV_DELIMITER));
 

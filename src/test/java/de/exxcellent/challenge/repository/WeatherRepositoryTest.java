@@ -6,7 +6,9 @@
 package de.exxcellent.challenge.repository;
 
 import de.exxcellent.challenge.domain.weather.IWeatherRepository;
+import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.weather.model.DailyWeather;
+import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +31,7 @@ public class WeatherRepositoryTest {
     private List<DailyWeather> expectedWeatherResultList;
     
     @Before
-    public void init() {
+    public void init() throws WeatherRepositoryException, WeatherDomainException {
         weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
         
         //prepare a randomly test
@@ -41,7 +43,7 @@ public class WeatherRepositoryTest {
     }
     
     @Test //TODO Exception handling
-    public void testFileRepositoryFindAllWeatherData() {
+    public void testFileRepositoryFindAllWeatherData() throws WeatherRepositoryException {
         List<DailyWeather> actualWeatherList = weatherRepository.findAllWeatherData();
         Assert.assertNotNull(actualWeatherList);
         Assert.assertTrue(actualWeatherList.size()==30);
@@ -59,21 +61,21 @@ public class WeatherRepositoryTest {
         });
     }
     
-    @Test //TODO Exception handling
-    public void testFileRepositoryFileIsNull() {
+    @Test(expected = WeatherRepositoryException.class)
+    public void testFileRepositoryFileIsNull() throws WeatherRepositoryException {
         weatherRepository =  new WeatherFileRepositoryImpl(null,ENCODING_FORMAT,CSV_DELIMITER);
         testFileRepositoryFindAllWeatherData();
     }
     
-    @Test //TODO Exception handling
-    public void testFileRepositoryFileNotFound() {
+    @Test(expected = WeatherRepositoryException.class)
+    public void testFileRepositoryFileNotFound() throws WeatherRepositoryException {
         final String WEATHER_CSV_WRONG_FILE_NAME = "de/exxcellent/challenge/test.csv";
         weatherRepository =  new WeatherFileRepositoryImpl(WEATHER_CSV_WRONG_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
         testFileRepositoryFindAllWeatherData();
     }
     
-    @Test //TODO Exception handling
-    public void testFileRepositorWrongDelimiter() {
+    @Test(expected = WeatherRepositoryException.class)
+    public void testFileRepositorWrongDelimiter() throws WeatherRepositoryException {
         final String WRONG_CSV_DELIMITER = ";";
         weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,WRONG_CSV_DELIMITER);
         testFileRepositoryFindAllWeatherData();
