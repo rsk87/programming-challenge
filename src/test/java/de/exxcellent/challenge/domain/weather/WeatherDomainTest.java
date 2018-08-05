@@ -9,8 +9,6 @@ import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.weather.impl.WeatherDomainServiceImpl;
 import de.exxcellent.challenge.domain.weather.model.DailyWeather;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -66,19 +64,16 @@ public class WeatherDomainTest {
     
     @Test
     public void testDayWithSmallestTempSpread() throws WeatherDomainException {
-        DailyWeather expectedResult = new DailyWeather("15",20,20);
-        List<DailyWeather> actualeList = new ArrayList<>();
-        actualeList.add(new DailyWeather("15",34,20));
-        actualeList.add(new DailyWeather("18",18,10));
-        actualeList.add(new DailyWeather("20",20,20));
-        actualeList.add(new DailyWeather("25",21,9));
-        actualeList.add(new DailyWeather("12",30,25));
-        Assert.assertEquals(expectedResult, weatherDomainService.getDayWithSmallestTempSpread(actualeList));
+        DailyWeather expectedResult = new DailyWeather("14",61,59);
+        Assert.assertEquals(expectedResult.getDay(), weatherDomainService.getDayWithSmallestTempSpread().getDay());
+        Assert.assertEquals(expectedResult.getMaxTemperature(), weatherDomainService.getDayWithSmallestTempSpread().getMaxTemperature());
+        Assert.assertEquals(expectedResult.getMinTemperature(), weatherDomainService.getDayWithSmallestTempSpread().getMinTemperature());
     }
     
     @Test(expected = WeatherDomainException.class)
     public void testGetDayWithSmallestTempSpreadEmptyList() throws WeatherDomainException {
-        List<DailyWeather> actualeList = new ArrayList<>();
-        weatherDomainService.getDayWithSmallestTempSpread(actualeList);
+        //wrong file
+        weatherDomainService = new WeatherDomainServiceImpl(new WeatherFileRepositoryImpl("test"));
+        weatherDomainService.getDayWithSmallestTempSpread();
     }
 }

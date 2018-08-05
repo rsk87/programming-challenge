@@ -24,8 +24,19 @@ public class WeatherDomainServiceImpl implements IWeatherDomainService {
     }
     
     @Override
-    public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList) throws WeatherDomainException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public DailyWeather getDayWithSmallestTempSpread() throws WeatherDomainException {
+        
+        List<DailyWeather> dailyWeatherList = weatherRepository.findAllWeatherData();
+        
+        if(dailyWeatherList == null || dailyWeatherList.isEmpty()) {
+            throw new WeatherDomainException("The given list of daily weather is null or empty");
+        }
+        
+        dailyWeatherList.sort(
+                (dailyWeather1, dailyWeather2) -> 
+                        dailyWeather1.getTemperatureSpread().compareTo(dailyWeather2.getTemperatureSpread()));
+        //dailyWeatherList.forEach((DailyWeather value) -> System.out.println(value.getDay()));
+        //System.out.println("Day: " + dailyWeatherList.get(0).getDay());
+        return dailyWeatherList.get(0);
     }
-    
 }

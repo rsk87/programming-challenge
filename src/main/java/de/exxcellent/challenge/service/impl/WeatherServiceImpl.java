@@ -10,8 +10,6 @@ import de.exxcellent.challenge.domain.weather.IWeatherRepository;
 import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.weather.impl.WeatherDomainServiceImpl;
 import de.exxcellent.challenge.service.IWeatherService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,12 +27,7 @@ public class WeatherServiceImpl implements IWeatherService {
     }
 
     @Override
-    public String getDayWithSmallestTempSpread() {
-        try {
-            weatherRepository.findAllWeatherData();
-        } catch (WeatherDomainException ex) {
-            Logger.getLogger(WeatherServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+    public String getDayWithSmallestTempSpread() throws WeatherDomainException {
+        return weatherDomainService.getDayWithSmallestTempSpread().getDay();
     }
 }

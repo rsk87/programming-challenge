@@ -31,7 +31,7 @@ public class FullApplicationTest {
     }
     
     @Test
-    public void testDayWithSmallestTempSpread() {
-        Assert.assertEquals("test", expectedResult, weatherService.getDayWithSmallestTempSpread()); 
+    public void testDayWithSmallestTempSpread() throws WeatherDomainException {
+        Assert.assertEquals(expectedResult, weatherService.getDayWithSmallestTempSpread()); 
     } 
 }
