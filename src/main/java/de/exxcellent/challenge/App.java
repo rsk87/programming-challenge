@@ -1,6 +1,6 @@
 package de.exxcellent.challenge;
 
-import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
+import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import de.exxcellent.challenge.service.IWeatherService;
 import de.exxcellent.challenge.service.impl.WeatherServiceImpl;
@@ -16,7 +16,7 @@ public final class App {
     private static final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
     private static final String DEFAULT_CSV_DELIMITER = ",";
 
-    public static void main(String... args) throws WeatherRepositoryException {
+    public static void main(String... args) throws WeatherDomainException {
         
         IWeatherService weatherService = new WeatherServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
 

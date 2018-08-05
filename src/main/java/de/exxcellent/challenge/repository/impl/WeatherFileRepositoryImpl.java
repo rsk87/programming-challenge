@@ -8,7 +8,6 @@ package de.exxcellent.challenge.repository.impl;
 import de.exxcellent.challenge.domain.weather.IWeatherRepository;
 import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.weather.model.DailyWeather;
-import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -41,12 +40,12 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
 
     /**
      * @param pFileName csv file name
-     * @throws de.exxcellent.challenge.repository.exception.WeatherRepositoryException
+     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException
      */
-    public WeatherFileRepositoryImpl(String pFileName) throws WeatherRepositoryException {
+    public WeatherFileRepositoryImpl(String pFileName) throws WeatherDomainException {
       
         if(pFileName == null) {
-            throw new WeatherRepositoryException("WeatherFileRepository parameter 'filename' is null");
+            throw new WeatherDomainException("WeatherFileRepository parameter 'filename' is null");
         }
         
         this.fileName = pFileName;
@@ -56,12 +55,12 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
     /**
      * @param pFileName csv file name
      * @param pDelimiter csv delimiter (optional)
-     * @throws de.exxcellent.challenge.repository.exception.WeatherRepositoryException
+     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException
      */
-    public WeatherFileRepositoryImpl(String pFileName, String pDelimiter) throws WeatherRepositoryException {
+    public WeatherFileRepositoryImpl(String pFileName, String pDelimiter) throws WeatherDomainException {
         
         if(pFileName == null) {
-            throw new WeatherRepositoryException("WeatherFileRepository parameter 'filename' is null");
+            throw new WeatherDomainException("WeatherFileRepository parameter 'filename' is null");
         }
         
         this.fileName = pFileName;
@@ -75,20 +74,21 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
     /**
      * Read daily weather csv file and mapping the data to domain model
      * @return a list from mapped daily weather data
+     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException
      */
     @Override
-    public List<DailyWeather> findAllWeatherData() throws WeatherRepositoryException {
+    public List<DailyWeather> findAllWeatherData() throws WeatherDomainException {
         List<DailyWeather> result = new ArrayList<>();
         
         URL fileUrl = getClass().getClassLoader().getResource(fileName);
         if(fileUrl == null) {
-            throw new WeatherRepositoryException("File with name " + fileName + " not found");
+            throw new WeatherDomainException("File with name " + fileName + " not found");
         }
 
         try {
             
             if(!isDelimiterExisting(fileUrl)) {
-                throw new WeatherRepositoryException("File with name " + fileName + " not contains delimiter '" + delimiter + "'");
+                throw new WeatherDomainException("File with name " + fileName + " not contains delimiter '" + delimiter + "'");
             }
             
             readCSVFile(fileUrl, Arrays.asList(COLUMN_DAY,COLUMN_MXT,COLUMN_MNT))
@@ -101,7 +101,7 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
                         }
             });
         } catch (URISyntaxException | IOException ex) {
-            throw new WeatherRepositoryException("Error while reading file with name " + fileName, ex);
+            throw new WeatherDomainException("Error while reading file with name " + fileName, ex);
         }        
         return result;
     }

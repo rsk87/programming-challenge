@@ -8,7 +8,6 @@ package de.exxcellent.challenge.domain.weather;
 import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.weather.impl.WeatherDomainServiceImpl;
 import de.exxcellent.challenge.domain.weather.model.DailyWeather;
-import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class WeatherDomainTest {
     private DailyWeather dailyWeather;
     
     @Before
-    public void init() throws WeatherRepositoryException {
+    public void init() throws WeatherDomainException {
         weatherDomainService = new WeatherDomainServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME));
     }
     
@@ -66,7 +65,7 @@ public class WeatherDomainTest {
     }
     
     @Test
-    public void testDayWithSmallestTempSpread() throws WeatherDomainException, WeatherDomainException {
+    public void testDayWithSmallestTempSpread() throws WeatherDomainException {
         DailyWeather expectedResult = new DailyWeather("15",20,20);
         List<DailyWeather> actualeList = new ArrayList<>();
         actualeList.add(new DailyWeather("15",34,20));

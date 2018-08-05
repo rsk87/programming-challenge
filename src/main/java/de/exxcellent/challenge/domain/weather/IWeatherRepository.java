@@ -5,8 +5,8 @@
  */
 package de.exxcellent.challenge.domain.weather;
 
+import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.weather.model.DailyWeather;
-import de.exxcellent.challenge.repository.exception.WeatherRepositoryException;
 import java.util.List;
 
 /**
@@ -20,7 +20,7 @@ public interface IWeatherRepository {
      * at the domain service it can be coverted to domain model
      * it has more flexibility
      * @return list of found daily weather objects 
-     * @throws de.exxcellent.challenge.repository.exception.WeatherRepositoryException 
+     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException 
      */
-    public List<DailyWeather> findAllWeatherData() throws WeatherRepositoryException;
+    public List<DailyWeather> findAllWeatherData() throws WeatherDomainException;
 }
