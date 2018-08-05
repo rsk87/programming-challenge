@@ -32,7 +32,7 @@ public class WeatherRepositoryTest {
     
     @Before
     public void init() throws WeatherRepositoryException, WeatherDomainException {
-        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
+        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME);
         
         //prepare a randomly test
         expectedWeatherResultList = new ArrayList<>(

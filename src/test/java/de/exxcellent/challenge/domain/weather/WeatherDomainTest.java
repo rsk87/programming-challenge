@@ -22,12 +22,14 @@ import org.junit.Test;
  */
 public class WeatherDomainTest {
     
+    private static final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
+    
     private IWeatherDomainService weatherDomainService;
     private DailyWeather dailyWeather;
     
     @Before
     public void init() throws WeatherRepositoryException {
-        weatherDomainService = new WeatherDomainServiceImpl(new WeatherFileRepositoryImpl(null,null,null));
+        weatherDomainService = new WeatherDomainServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME));
     }
     
     private DailyWeather createDailyWeather(String day, Integer mxt, Integer min) throws WeatherDomainException {

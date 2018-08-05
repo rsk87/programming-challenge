@@ -13,9 +13,9 @@ import de.exxcellent.challenge.service.impl.WeatherServiceImpl;
  */
 public final class App {
     
-    private static final String WEATHER_CSV_FILE_NAME = "";
-    private static final String DEFAULT_ENCODING_FORMAT = "";
-    private static final String DEFAULT_CSV_DELIMITER = "";
+    private static final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
+    private static final String DEFAULT_ENCODING_FORMAT = "UTF-8";
+    private static final String DEFAULT_CSV_DELIMITER = ",";
 
     public static void main(String... args) throws WeatherRepositoryException {
         
