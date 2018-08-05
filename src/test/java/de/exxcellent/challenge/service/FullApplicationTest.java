@@ -25,9 +25,8 @@ public class FullApplicationTest {
     @Before
     public void init() throws WeatherRepositoryException {
         final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
-        final String DEFAULT_ENCODING_FORMAT = "UTF-8";
         final String DEFAULT_CSV_DELIMITER = ",";
-        weatherService = new WeatherServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_ENCODING_FORMAT, DEFAULT_CSV_DELIMITER));
+        weatherService = new WeatherServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
         expectedResult = "14";
     }
     

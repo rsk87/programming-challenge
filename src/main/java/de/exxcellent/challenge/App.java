@@ -14,12 +14,11 @@ import de.exxcellent.challenge.service.impl.WeatherServiceImpl;
 public final class App {
     
     private static final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
-    private static final String DEFAULT_ENCODING_FORMAT = "UTF-8";
     private static final String DEFAULT_CSV_DELIMITER = ",";
 
     public static void main(String... args) throws WeatherRepositoryException {
         
-        IWeatherService weatherService = new WeatherServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_ENCODING_FORMAT, DEFAULT_CSV_DELIMITER));
+        IWeatherService weatherService = new WeatherServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
 
         String dayWithSmallestTempSpread = weatherService.getDayWithSmallestTempSpread();     // Your day analysis function call …
         String teamWithSmallesGoalSpread = "A good team"; // Your goal analysis function call …

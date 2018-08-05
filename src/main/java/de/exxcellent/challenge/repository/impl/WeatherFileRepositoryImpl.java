@@ -29,13 +29,10 @@ import java.util.stream.Stream;
  * @author c.kaddatz
  */
 public class WeatherFileRepositoryImpl implements IWeatherRepository {
-    
-    private static final String DEFAULT_ENCODING_FORMAT = "UTF-8";
+
     private static final String DEFAULT_CSV_DELIMITER = ",";
     
     private String fileName;
-    //TODO remove encoding attribute, when use java 8 stream it is not necessary
-    private String encodingFormat;
     private String delimiter;
     
     private static final String COLUMN_DAY = "Day";
@@ -53,29 +50,22 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
         }
         
         this.fileName = pFileName;
-        this.encodingFormat = DEFAULT_ENCODING_FORMAT;
         this.delimiter = DEFAULT_CSV_DELIMITER;
     }
     
     /**
      * @param pFileName csv file name
-     * @param pEncodingFormat data encoding format (optional)
      * @param pDelimiter csv delimiter (optional)
      * @throws de.exxcellent.challenge.repository.exception.WeatherRepositoryException
      */
-    public WeatherFileRepositoryImpl(String pFileName, String pEncodingFormat, String pDelimiter) throws WeatherRepositoryException {
+    public WeatherFileRepositoryImpl(String pFileName, String pDelimiter) throws WeatherRepositoryException {
         
         if(pFileName == null) {
             throw new WeatherRepositoryException("WeatherFileRepository parameter 'filename' is null");
         }
         
         this.fileName = pFileName;
-        this.encodingFormat = DEFAULT_ENCODING_FORMAT;
         this.delimiter = DEFAULT_CSV_DELIMITER;
-        
-        if(pEncodingFormat != null) {
-            this.encodingFormat = pEncodingFormat;
-        }
         
         if(pDelimiter != null) {
             this.delimiter = pDelimiter;
@@ -204,7 +194,6 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
     public int hashCode() {
         int hash = 5;
         hash = 23 * hash + Objects.hashCode(this.fileName);
-        hash = 23 * hash + Objects.hashCode(this.encodingFormat);
         hash = 23 * hash + Objects.hashCode(this.delimiter);
         return hash;
     }
@@ -226,9 +215,6 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
         }
         final WeatherFileRepositoryImpl other = (WeatherFileRepositoryImpl) obj;
         if (!Objects.equals(this.fileName, other.fileName)) {
-            return false;
-        }
-        if (!Objects.equals(this.encodingFormat, other.encodingFormat)) {
             return false;
         }
         return Objects.equals(this.delimiter, other.delimiter);

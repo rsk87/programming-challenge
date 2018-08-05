@@ -24,7 +24,6 @@ import org.junit.Test;
 public class WeatherRepositoryTest {
     
     private static final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
-    private static final String ENCODING_FORMAT = "UTF-8";
     private static final String CSV_DELIMITER = ",";
     
     private IWeatherRepository weatherRepository;
@@ -75,13 +74,13 @@ public class WeatherRepositoryTest {
     
     @Test
     public void testFileRepositoryOptionalParameter() throws WeatherRepositoryException {
-        IWeatherRepository expectedWeatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
+        IWeatherRepository expectedWeatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, CSV_DELIMITER);
         
-        //test encoding and delimiter as parameter value
-        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
+        //test delimiter as parameter value
+        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, CSV_DELIMITER);
         Assert.assertEquals(expectedWeatherRepository, weatherRepository);
         
-        //test encoding and delimiter as default value
+        //test delimiter as default value
         weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME);
         Assert.assertEquals(expectedWeatherRepository, weatherRepository);
     }
@@ -89,7 +88,7 @@ public class WeatherRepositoryTest {
     @Test(expected = WeatherRepositoryException.class)
     public void testFileRepositorWrongFileDelimiter() throws WeatherRepositoryException {
         final String WRONG_CSV_DELIMITER = ";";
-        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,WRONG_CSV_DELIMITER);
+        weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, WRONG_CSV_DELIMITER);
         testFileRepositoryFindAllWeatherData();
     }
 }
