@@ -79,11 +79,11 @@ public class WeatherRepositoryTest {
         
         //test encoding and delimiter as parameter value
         weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME,ENCODING_FORMAT,CSV_DELIMITER);
-        Assert.assertEquals(weatherRepository, expectedWeatherRepository);
+        Assert.assertEquals(expectedWeatherRepository, weatherRepository);
         
         //test encoding and delimiter as default value
         weatherRepository = new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME);
-        Assert.assertEquals(weatherRepository, expectedWeatherRepository);
+        Assert.assertEquals(expectedWeatherRepository, weatherRepository);
     }
     
     @Test(expected = WeatherRepositoryException.class)
