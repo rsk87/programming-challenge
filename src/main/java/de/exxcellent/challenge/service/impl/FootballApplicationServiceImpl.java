@@ -32,6 +32,6 @@ public class FootballApplicationServiceImpl implements IFootballApplicationServi
      */
     @Override
     public String getTeamWithSmallestGoalDistance() throws FootballDomainException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return footballDomainService.getTeamWithSmallestGoalDistance().getTeam();
     }
 }
