@@ -20,7 +20,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- *
+ * Base implemantion of file repository
  * @author c.kaddatz
  */
 public class BaseFileRepository {

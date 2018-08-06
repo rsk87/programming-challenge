@@ -35,7 +35,7 @@ public class FootballFileRepositoryImpl extends BaseFileRepository implements IF
         super(pFileName, null);
         
         if(pFileName == null) {
-            throw new FootballDomainException("WeatherFileRepository parameter 'filename' is null");
+            throw new FootballDomainException("FootballFileRepository parameter 'filename' is null");
         }
     }
     
@@ -49,7 +49,7 @@ public class FootballFileRepositoryImpl extends BaseFileRepository implements IF
         super(pFileName, pDelimiter);
         
         if(pFileName == null) {
-            throw new FootballDomainException("WeatherFileRepository parameter 'filename' is null");
+            throw new FootballDomainException("FootballFileRepository parameter 'filename' is null");
         }
     }
 
