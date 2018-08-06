@@ -23,6 +23,11 @@ public class WeatherDomainServiceImpl implements IWeatherDomainService {
         this.weatherRepository = pWeatherRepository;
     }
     
+    /**
+     * 
+     * @return
+     * @throws WeatherDomainException 
+     */
     @Override
     public DailyWeather getDayWithSmallestTempSpread() throws WeatherDomainException {
         
@@ -32,11 +37,10 @@ public class WeatherDomainServiceImpl implements IWeatherDomainService {
             throw new WeatherDomainException("The given list of daily weather is null or empty");
         }
         
+        //sort by temperatureSpread to get the object with the smallest temperatureSpread
         dailyWeatherList.sort(
                 (dailyWeather1, dailyWeather2) -> 
                         dailyWeather1.getTemperatureSpread().compareTo(dailyWeather2.getTemperatureSpread()));
-        //dailyWeatherList.forEach((DailyWeather value) -> System.out.println(value.getDay()));
-        //System.out.println("Day: " + dailyWeatherList.get(0).getDay());
         return dailyWeatherList.get(0);
     }
 }

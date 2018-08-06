@@ -92,20 +92,20 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
             }
             
             readCSVFile(fileUrl, Arrays.asList(COLUMN_DAY,COLUMN_MXT,COLUMN_MNT))
-                    .forEach((Map<String, String> line) -> {
-                        try {
-                            result.add(new DailyWeather(line.get(COLUMN_DAY),Integer.parseInt(line.get(COLUMN_MXT)),Integer.parseInt(line.get(COLUMN_MNT))));
-                        } catch (WeatherDomainException ex) {
-                            //TODO modify exception handling -> one exception type per domain
-                            //exception handling...
-                        }
+                .forEach(line -> {
+                try {
+                    result.add(new DailyWeather(line.get(COLUMN_DAY),Integer.parseInt(line.get(COLUMN_MXT)),Integer.parseInt(line.get(COLUMN_MNT))));
+                } catch (WeatherDomainException ex) {
+                    throw new IllegalArgumentException(ex.getMessage(),ex);
+                }
             });
+            
         } catch (URISyntaxException | IOException ex) {
             throw new WeatherDomainException("Error while reading file with name " + fileName, ex);
         }        
         return result;
     }
-    
+
     /**
      * check if the given delimiter exist in given csv file
      * @param fileUrl
