@@ -35,6 +35,7 @@ public class FootballTeam {
         this.team = pTeam;
         this.goals = pGoals;
         this.goalsAllowed = pGoalsAllowed;
+        //absolute difference as unsigned long
         this.absoluteGoalDifference = Integer.toUnsignedLong(goals - goalsAllowed); 
     }
     

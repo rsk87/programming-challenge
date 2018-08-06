@@ -27,11 +27,12 @@ public class FullApplicationTest {
     private String expectedResult;
     
     @Before
-    public void init() throws WeatherDomainException {
+    public void init() throws WeatherDomainException, FootballDomainException {
         final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
+        final String FOOTBALL_CSV_FILE_NAME = "de/exxcellent/challenge/football.csv";
         final String DEFAULT_CSV_DELIMITER = ",";
         weatherService = new WeatherApplicationServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
-        footballService = new FootballApplicationServiceImpl(new FootballFileRepositoryImpl(/*WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER*/));
+        footballService = new FootballApplicationServiceImpl(new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
     }
     
     @Test

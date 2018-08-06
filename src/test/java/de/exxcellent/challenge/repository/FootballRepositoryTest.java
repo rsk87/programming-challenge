@@ -7,7 +7,6 @@ package de.exxcellent.challenge.repository;
 
 import de.exxcellent.challenge.domain.IFootballRepository;
 import de.exxcellent.challenge.domain.exception.FootballDomainException;
-import de.exxcellent.challenge.domain.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.model.FootballTeam;
 import de.exxcellent.challenge.repository.impl.FootballFileRepositoryImpl;
 import java.util.ArrayList;
@@ -30,8 +29,8 @@ public class FootballRepositoryTest {
     private List<FootballTeam> expectedFootballResultList;
     
     @Before
-    public void init() throws WeatherDomainException {
-        footballRepository = new FootballFileRepositoryImpl();
+    public void init() throws FootballDomainException {
+        footballRepository = new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME);
         
         //prepare a randomly test
         expectedFootballResultList = new ArrayList<>(
@@ -62,33 +61,33 @@ public class FootballRepositoryTest {
     
     @Test(expected = FootballDomainException.class)
     public void testFileRepositoryFileIsNull() throws FootballDomainException {
-        footballRepository =  new FootballFileRepositoryImpl(/*null*/);
+        footballRepository =  new FootballFileRepositoryImpl(null);
     }
     
     @Test(expected = FootballDomainException.class)
     public void testFileRepositoryFileNotFound() throws FootballDomainException {
-        final String WEATHER_CSV_WRONG_FILE_NAME = "de/exxcellent/challenge/test.csv";
-        footballRepository =  new FootballFileRepositoryImpl();
+        final String FOOTBALL_CSV_WRONG_FILE_NAME = "de/exxcellent/challenge/test.csv";
+        footballRepository =  new FootballFileRepositoryImpl(FOOTBALL_CSV_WRONG_FILE_NAME);
         testFileRepositoryFindAllFootballData();
     }
     
     @Test
     public void testFileRepositoryOptionalParameter() throws FootballDomainException {
-        IFootballRepository expectedFootballRepository = new FootballFileRepositoryImpl(/*WEATHER_CSV_FILE_NAME, CSV_DELIMITER*/);
+        IFootballRepository expectedFootballRepository = new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME, CSV_DELIMITER);
         
         //test delimiter as parameter value
-        footballRepository = new FootballFileRepositoryImpl(/*WEATHER_CSV_FILE_NAME, CSV_DELIMITER*/);
+        footballRepository = new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME, CSV_DELIMITER);
         Assert.assertEquals(expectedFootballRepository, footballRepository);
         
         //test delimiter as default value
-        footballRepository = new FootballFileRepositoryImpl(/*WEATHER_CSV_FILE_NAME*/);
+        footballRepository = new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME);
         Assert.assertEquals(expectedFootballRepository, footballRepository);
     }
     
     @Test(expected = FootballDomainException.class)
     public void testFileRepositorWrongFileDelimiter() throws FootballDomainException {
         final String WRONG_CSV_DELIMITER = ";";
-        footballRepository = new FootballFileRepositoryImpl(/*WEATHER_CSV_FILE_NAME, WRONG_CSV_DELIMITER*/);
+        footballRepository = new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME, WRONG_CSV_DELIMITER);
         testFileRepositoryFindAllFootballData();
     }
 }

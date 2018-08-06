@@ -8,21 +8,117 @@ package de.exxcellent.challenge.repository.impl;
 import de.exxcellent.challenge.domain.IFootballRepository;
 import de.exxcellent.challenge.domain.exception.FootballDomainException;
 import de.exxcellent.challenge.domain.model.FootballTeam;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * CSV file repository implementation
  * @author c.kaddatz
  */
-public class FootballFileRepositoryImpl implements IFootballRepository {
+public class FootballFileRepositoryImpl extends BaseFileRepository implements IFootballRepository {
+    
+    private static final String COLUMN_TEAM = "Team";
+    private static final String COLUMN_GOALS = "Goals";
+    private static final String COLUMN_GOALS_ALLOWED = "Goals Allowed";
+    
+    /**
+     * @param pFileName csv file name
+     * @throws de.exxcellent.challenge.domain.exception.FootballDomainException
+     */
+    public FootballFileRepositoryImpl(String pFileName) throws FootballDomainException {
+        
+        super(pFileName, null);
+        
+        if(pFileName == null) {
+            throw new FootballDomainException("WeatherFileRepository parameter 'filename' is null");
+        }
+    }
+    
+    /**
+     * @param pFileName csv file name
+     * @param pDelimiter csv delimiter (optional)
+     * @throws de.exxcellent.challenge.domain.exception.FootballDomainException
+     */
+    public FootballFileRepositoryImpl(String pFileName, String pDelimiter) throws FootballDomainException {
+        
+        super(pFileName, pDelimiter);
+        
+        if(pFileName == null) {
+            throw new FootballDomainException("WeatherFileRepository parameter 'filename' is null");
+        }
+    }
 
     /**
-     * 
-     * @return
+     * Read football team csv file and mapping the data to domain model
+     * @return a list from mapped football team data
      * @throws FootballDomainException 
      */
     @Override
     public List<FootballTeam> findAllFootballData() throws FootballDomainException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<FootballTeam> result = new ArrayList<>();
+        
+        URL fileUrl = getFileUrl();
+        if(fileUrl == null) {
+            throw new FootballDomainException("File with name " + fileName + " not found");
+        }
+
+        try {
+            
+            if(!isDelimiterExisting(fileUrl)) {
+                throw new FootballDomainException("File with name " + fileName + " not contains delimiter '" + delimiter + "'");
+            }
+            
+            readCSVFile(fileUrl, Arrays.asList(COLUMN_TEAM,COLUMN_GOALS,COLUMN_GOALS_ALLOWED))
+                .forEach(line -> {
+                try {
+                    result.add(new FootballTeam(line.get(COLUMN_TEAM),Integer.parseInt(line.get(COLUMN_GOALS)),Integer.parseInt(line.get(COLUMN_GOALS_ALLOWED))));
+                } catch (FootballDomainException ex) {
+                    throw new IllegalArgumentException(ex.getMessage(),ex);
+                }
+            });
+            
+        } catch (URISyntaxException | IOException ex) {
+            throw new FootballDomainException("Error while reading file with name " + fileName, ex);
+        }        
+        return result;
+    }
+        
+    /**
+     * necessary for test equality of objects...
+     * @return 
+     */
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.fileName);
+        hash = 23 * hash + Objects.hashCode(this.delimiter);
+        return hash;
+    }
+    
+    /**
+     * necessary for test equality of objects...
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FootballFileRepositoryImpl other = (FootballFileRepositoryImpl) obj;
+        if (!Objects.equals(this.fileName, other.fileName)) {
+            return false;
+        }
+        return Objects.equals(this.delimiter, other.delimiter);
     }
 }

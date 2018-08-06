@@ -19,12 +19,14 @@ import org.junit.Test;
  */
 public class FootballDomainTest {
     
+    private static final String FOOTBALL_CSV_FILE_NAME = "de/exxcellent/challenge/football.csv";
+    
     private IFootballDomainService footballDomainService;
     private FootballTeam footballTeam;
     
     @Before
     public void init() throws FootballDomainException {
-        footballDomainService = new FootballDomainServiceImpl(new FootballFileRepositoryImpl());
+        footballDomainService = new FootballDomainServiceImpl(new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME));
     }
     
     private FootballTeam createFootballTeam(String team, Integer goals, Integer goalsAllowed) throws FootballDomainException {
@@ -65,7 +67,7 @@ public class FootballDomainTest {
     @Test(expected = FootballDomainException.class)
     public void testGetTeamWithSmallestGoalDistanceEmptyList() throws FootballDomainException {
         //wrong file
-        footballDomainService = new FootballDomainServiceImpl(new FootballFileRepositoryImpl());
+        footballDomainService = new FootballDomainServiceImpl(new FootballFileRepositoryImpl("test"));
         footballDomainService.getTeamWithSmallestGoalDistance();
     }
 }
