@@ -16,7 +16,7 @@ public class FootballTeam {
     private String team;
     private Integer goals;
     private Integer goalsAllowed;
-    private Long absoluteGoalDifference;
+    private Integer absoluteGoalDifference;
 
     public FootballTeam(String pTeam, Integer pGoals, Integer pGoalsAllowed) throws FootballDomainException {
         
@@ -35,8 +35,8 @@ public class FootballTeam {
         this.team = pTeam;
         this.goals = pGoals;
         this.goalsAllowed = pGoalsAllowed;
-        //absolute difference as unsigned long
-        this.absoluteGoalDifference = Integer.toUnsignedLong(goals - goalsAllowed); 
+        //absolute difference as positiv integer
+        this.absoluteGoalDifference = Math.abs(goals - goalsAllowed); 
     }
     
     public String getTeam() {
@@ -63,11 +63,11 @@ public class FootballTeam {
         this.goalsAllowed = goalsAllowed;
     }
 
-    public Long getAbsoluteGoalDifference() {
+    public Integer getAbsoluteGoalDifference() {
         return absoluteGoalDifference;
     }
 
-    public void setAbsoluteGoalDifference(Long absoluteGoalDifference) {
+    public void setAbsoluteGoalDifference(Integer absoluteGoalDifference) {
         this.absoluteGoalDifference = absoluteGoalDifference;
     }
 }

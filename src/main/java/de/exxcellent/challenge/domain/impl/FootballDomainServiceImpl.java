@@ -9,6 +9,7 @@ import de.exxcellent.challenge.domain.IFootballDomainService;
 import de.exxcellent.challenge.domain.IFootballRepository;
 import de.exxcellent.challenge.domain.exception.FootballDomainException;
 import de.exxcellent.challenge.domain.model.FootballTeam;
+import java.util.List;
 
 /**
  *
@@ -29,6 +30,16 @@ public class FootballDomainServiceImpl implements IFootballDomainService {
      */
     @Override
     public FootballTeam getTeamWithSmallestGoalDistance() throws FootballDomainException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<FootballTeam> footballTeamList = footballRepository.findAllFootballData();
+        
+        if(footballTeamList == null || footballTeamList.isEmpty()) {
+            throw new FootballDomainException("The given list of football teams is null or empty");
+        }
+        
+        //sort by absoluteGoalDifference to get the object with the absolute, smallest goal difference
+        footballTeamList.sort(
+                (footballTeam1, footballTeam2) -> 
+                        footballTeam1.getAbsoluteGoalDifference().compareTo(footballTeam2.getAbsoluteGoalDifference()));     
+        return footballTeamList.get(0);
     }
 }
