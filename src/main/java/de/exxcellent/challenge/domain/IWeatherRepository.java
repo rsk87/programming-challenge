@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.exxcellent.challenge.domain.weather;
+package de.exxcellent.challenge.domain;
 
-import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
-import de.exxcellent.challenge.domain.weather.model.DailyWeather;
+import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.model.DailyWeather;
 import java.util.List;
 
 /**
@@ -20,7 +20,7 @@ public interface IWeatherRepository {
      * at the domain service it can be coverted to domain model
      * it has more flexibility
      * @return list of found daily weather objects 
-     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException 
+     * @throws de.exxcellent.challenge.domain.exception.WeatherDomainException 
      */
     public List<DailyWeather> findAllWeatherData() throws WeatherDomainException;
 }

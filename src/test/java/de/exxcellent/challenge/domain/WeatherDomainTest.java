@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.exxcellent.challenge.domain.weather;
+package de.exxcellent.challenge.domain;
 
-import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
-import de.exxcellent.challenge.domain.weather.impl.WeatherDomainServiceImpl;
-import de.exxcellent.challenge.domain.weather.model.DailyWeather;
+import de.exxcellent.challenge.domain.IWeatherDomainService;
+import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.impl.WeatherDomainServiceImpl;
+import de.exxcellent.challenge.domain.model.DailyWeather;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import org.junit.Assert;
 import org.junit.Before;

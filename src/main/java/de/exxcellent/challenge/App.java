@@ -1,6 +1,6 @@
 package de.exxcellent.challenge;
 
-import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.exception.WeatherDomainException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import de.exxcellent.challenge.service.IWeatherService;
 import de.exxcellent.challenge.service.impl.WeatherServiceImpl;

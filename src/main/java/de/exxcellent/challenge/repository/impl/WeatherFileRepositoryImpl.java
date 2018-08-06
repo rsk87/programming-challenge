@@ -5,9 +5,9 @@
  */
 package de.exxcellent.challenge.repository.impl;
 
-import de.exxcellent.challenge.domain.weather.IWeatherRepository;
-import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
-import de.exxcellent.challenge.domain.weather.model.DailyWeather;
+import de.exxcellent.challenge.domain.IWeatherRepository;
+import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.model.DailyWeather;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -40,7 +40,7 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
 
     /**
      * @param pFileName csv file name
-     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException
+     * @throws de.exxcellent.challenge.domain.exception.WeatherDomainException
      */
     public WeatherFileRepositoryImpl(String pFileName) throws WeatherDomainException {
       
@@ -55,7 +55,7 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
     /**
      * @param pFileName csv file name
      * @param pDelimiter csv delimiter (optional)
-     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException
+     * @throws de.exxcellent.challenge.domain.exception.WeatherDomainException
      */
     public WeatherFileRepositoryImpl(String pFileName, String pDelimiter) throws WeatherDomainException {
         
@@ -74,7 +74,7 @@ public class WeatherFileRepositoryImpl implements IWeatherRepository {
     /**
      * Read daily weather csv file and mapping the data to domain model
      * @return a list from mapped daily weather data
-     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException
+     * @throws de.exxcellent.challenge.domain.exception.WeatherDomainException
      */
     @Override
     public List<DailyWeather> findAllWeatherData() throws WeatherDomainException {

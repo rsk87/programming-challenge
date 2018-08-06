@@ -5,7 +5,7 @@
  */
 package de.exxcellent.challenge.service;
 
-import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.exception.WeatherDomainException;
 
 /**
  *
@@ -16,7 +16,7 @@ public interface IWeatherService {
     /**
      * 
      * @return day with smallest temperature as string 
-     * @throws de.exxcellent.challenge.domain.weather.exception.WeatherDomainException 
+     * @throws de.exxcellent.challenge.domain.exception.WeatherDomainException 
      */
     public String getDayWithSmallestTempSpread() throws WeatherDomainException;
 }

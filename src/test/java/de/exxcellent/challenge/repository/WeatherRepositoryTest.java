@@ -5,9 +5,9 @@
  */
 package de.exxcellent.challenge.repository;
 
-import de.exxcellent.challenge.domain.weather.IWeatherRepository;
-import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
-import de.exxcellent.challenge.domain.weather.model.DailyWeather;
+import de.exxcellent.challenge.domain.IWeatherRepository;
+import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.model.DailyWeather;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import java.util.ArrayList;
 import java.util.Arrays;

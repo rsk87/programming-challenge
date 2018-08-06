@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.exxcellent.challenge.domain.weather.model;
+package de.exxcellent.challenge.domain.model;
 
-import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.exception.WeatherDomainException;
 
 /**
  *

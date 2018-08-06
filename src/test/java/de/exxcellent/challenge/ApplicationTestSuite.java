@@ -5,7 +5,7 @@
  */
 package de.exxcellent.challenge;
 
-import de.exxcellent.challenge.domain.weather.WeatherDomainTest;
+import de.exxcellent.challenge.domain.WeatherDomainTest;
 import de.exxcellent.challenge.repository.WeatherRepositoryTest;
 import de.exxcellent.challenge.service.FullApplicationTest;
 import org.junit.runner.RunWith;

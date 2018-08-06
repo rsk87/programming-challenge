@@ -5,10 +5,10 @@
  */
 package de.exxcellent.challenge.service.impl;
 
-import de.exxcellent.challenge.domain.weather.IWeatherDomainService;
-import de.exxcellent.challenge.domain.weather.IWeatherRepository;
-import de.exxcellent.challenge.domain.weather.exception.WeatherDomainException;
-import de.exxcellent.challenge.domain.weather.impl.WeatherDomainServiceImpl;
+import de.exxcellent.challenge.domain.IWeatherDomainService;
+import de.exxcellent.challenge.domain.IWeatherRepository;
+import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.impl.WeatherDomainServiceImpl;
 import de.exxcellent.challenge.service.IWeatherService;
 
 /**
