@@ -11,7 +11,7 @@ import de.exxcellent.challenge.domain.exception.WeatherDomainException;
  *
  * @author c.kaddatz
  */
-public interface IWeatherService {
+public interface IWeatherApplicationService {
 
     /**
      * 

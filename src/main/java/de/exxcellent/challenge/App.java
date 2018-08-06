@@ -2,8 +2,8 @@ package de.exxcellent.challenge;
 
 import de.exxcellent.challenge.domain.exception.WeatherDomainException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
-import de.exxcellent.challenge.service.IWeatherService;
-import de.exxcellent.challenge.service.impl.WeatherServiceImpl;
+import de.exxcellent.challenge.service.impl.WeatherApplicationServiceImpl;
+import de.exxcellent.challenge.service.IWeatherApplicationService;
 
 /**
  * The entry class for your solution. This class is only aimed as starting point and not intended as baseline for your software
@@ -18,7 +18,7 @@ public final class App {
 
     public static void main(String... args) throws WeatherDomainException {
         
-        IWeatherService weatherService = new WeatherServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
+        IWeatherApplicationService weatherService = new WeatherApplicationServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
 
         String dayWithSmallestTempSpread = weatherService.getDayWithSmallestTempSpread();     // Your day analysis function call …
         String teamWithSmallesGoalSpread = "A good team"; // Your goal analysis function call …

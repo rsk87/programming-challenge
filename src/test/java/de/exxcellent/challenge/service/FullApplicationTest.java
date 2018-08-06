@@ -7,7 +7,7 @@ package de.exxcellent.challenge.service;
 
 import de.exxcellent.challenge.domain.exception.WeatherDomainException;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
-import de.exxcellent.challenge.service.impl.WeatherServiceImpl;
+import de.exxcellent.challenge.service.impl.WeatherApplicationServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import org.junit.Test;
  */
 public class FullApplicationTest {
     
-    private IWeatherService weatherService;
+    private IWeatherApplicationService weatherService;
     
     private String expectedResult;
     
@@ -26,7 +26,7 @@ public class FullApplicationTest {
     public void init() throws WeatherDomainException {
         final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
         final String DEFAULT_CSV_DELIMITER = ",";
-        weatherService = new WeatherServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
+        weatherService = new WeatherApplicationServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
         expectedResult = "14";
     }
     

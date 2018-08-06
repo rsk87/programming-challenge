@@ -25,7 +25,7 @@ public class WeatherDomainServiceImpl implements IWeatherDomainService {
     
     /**
      * 
-     * @return
+     * @return the daily weather object with the smallest temperature spread
      * @throws WeatherDomainException 
      */
     @Override
