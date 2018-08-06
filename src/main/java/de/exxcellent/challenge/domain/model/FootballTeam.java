@@ -5,6 +5,8 @@
  */
 package de.exxcellent.challenge.domain.model;
 
+import de.exxcellent.challenge.domain.exception.FootballDomainException;
+
 /**
  *
  * @author c.kaddatz
@@ -14,13 +16,26 @@ public class FootballTeam {
     private String team;
     private Integer goals;
     private Integer goalsAllowed;
-    private Integer absoluteGoalDifference;
+    private Long absoluteGoalDifference;
 
-    public FootballTeam(String pTeam, Integer pGoals, Integer pGoalsAllowed) {
+    public FootballTeam(String pTeam, Integer pGoals, Integer pGoalsAllowed) throws FootballDomainException {
+        
+        if(pTeam == null) {
+            throw new FootballDomainException("Football team parameter 'team' is null");
+        }
+        
+        if(pGoals == null) {
+            throw new FootballDomainException("Football team parameter 'goals' is null");
+        }
+        
+        if(pGoalsAllowed == null) {
+            throw new FootballDomainException("Football team parameter 'goalsAllowed' is null");
+        }
+        
         this.team = pTeam;
         this.goals = pGoals;
         this.goalsAllowed = pGoalsAllowed;
-        this.absoluteGoalDifference = goals - goalsAllowed; 
+        this.absoluteGoalDifference = Integer.toUnsignedLong(goals - goalsAllowed); 
     }
     
     public String getTeam() {
@@ -47,11 +62,11 @@ public class FootballTeam {
         this.goalsAllowed = goalsAllowed;
     }
 
-    public Integer getAbsoluteGoalDifference() {
+    public Long getAbsoluteGoalDifference() {
         return absoluteGoalDifference;
     }
 
-    public void setAbsoluteGoalDifference(Integer absoluteGoalDifference) {
+    public void setAbsoluteGoalDifference(Long absoluteGoalDifference) {
         this.absoluteGoalDifference = absoluteGoalDifference;
     }
 }
