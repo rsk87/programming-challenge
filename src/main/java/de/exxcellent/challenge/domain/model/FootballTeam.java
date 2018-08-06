@@ -14,11 +14,13 @@ public class FootballTeam {
     private String team;
     private Integer goals;
     private Integer goalsAllowed;
+    private Integer absoluteGoalDifference;
 
-    public FootballTeam(String team, Integer goals, Integer goalsAllowed) {
-        this.team = team;
-        this.goals = goals;
-        this.goalsAllowed = goalsAllowed;
+    public FootballTeam(String pTeam, Integer pGoals, Integer pGoalsAllowed) {
+        this.team = pTeam;
+        this.goals = pGoals;
+        this.goalsAllowed = pGoalsAllowed;
+        this.absoluteGoalDifference = goals - goalsAllowed; 
     }
     
     public String getTeam() {
@@ -43,5 +45,13 @@ public class FootballTeam {
 
     public void setGoalsAllowed(Integer goalsAllowed) {
         this.goalsAllowed = goalsAllowed;
+    }
+
+    public Integer getAbsoluteGoalDifference() {
+        return absoluteGoalDifference;
+    }
+
+    public void setAbsoluteGoalDifference(Integer absoluteGoalDifference) {
+        this.absoluteGoalDifference = absoluteGoalDifference;
     }
 }
