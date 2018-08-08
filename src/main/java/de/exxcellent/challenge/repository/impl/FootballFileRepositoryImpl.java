@@ -77,6 +77,7 @@ public class FootballFileRepositoryImpl extends BaseFileRepository implements IF
                 .forEach(line -> {
                 try {
                     result.add(new FootballTeam(line.get(COLUMN_TEAM),Integer.parseInt(line.get(COLUMN_GOALS)),Integer.parseInt(line.get(COLUMN_GOALS_ALLOWED))));
+                //find better solution -> addional mapping class
                 } catch (FootballDomainException ex) {
                     throw new IllegalArgumentException(ex.getMessage(),ex);
                 }

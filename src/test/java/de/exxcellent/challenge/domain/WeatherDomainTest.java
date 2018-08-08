@@ -8,7 +8,8 @@ package de.exxcellent.challenge.domain;
 import de.exxcellent.challenge.domain.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.impl.WeatherDomainServiceImpl;
 import de.exxcellent.challenge.domain.model.DailyWeather;
-import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,14 +20,12 @@ import org.junit.Test;
  */
 public class WeatherDomainTest {
     
-    private static final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
-    
     private IWeatherDomainService weatherDomainService;
     private DailyWeather dailyWeather;
     
     @Before
     public void init() throws WeatherDomainException {
-        weatherDomainService = new WeatherDomainServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME));
+        weatherDomainService = new WeatherDomainServiceImpl();
     }
     
     private DailyWeather createDailyWeather(String day, Integer mxt, Integer min) throws WeatherDomainException {
@@ -64,16 +63,20 @@ public class WeatherDomainTest {
     
     @Test
     public void testDayWithSmallestTempSpread() throws WeatherDomainException {
-        DailyWeather expectedResult = new DailyWeather("14",61,59);
-        Assert.assertEquals(expectedResult.getDay(), weatherDomainService.getDayWithSmallestTempSpread().getDay());
-        Assert.assertEquals(expectedResult.getMaxTemperature(), weatherDomainService.getDayWithSmallestTempSpread().getMaxTemperature());
-        Assert.assertEquals(expectedResult.getMinTemperature(), weatherDomainService.getDayWithSmallestTempSpread().getMinTemperature());
+        DailyWeather expectedResult = createDailyWeather("14",61,59);
+        List<DailyWeather> actualList = new ArrayList<>();
+        actualList.add(createDailyWeather("20",58,32));
+        actualList.add(createDailyWeather("2",60,30));
+        actualList.add(expectedResult);
+        
+        DailyWeather actualResult = weatherDomainService.getDayWithSmallestTempSpread(actualList);
+        Assert.assertEquals(expectedResult.getDay(),actualResult.getDay());
+        Assert.assertEquals(expectedResult.getMaxTemperature(), actualResult.getMaxTemperature());
+        Assert.assertEquals(expectedResult.getMinTemperature(), actualResult.getMinTemperature());
     }
     
     @Test(expected = WeatherDomainException.class)
     public void testGetDayWithSmallestTempSpreadEmptyList() throws WeatherDomainException {
-        //wrong file
-        weatherDomainService = new WeatherDomainServiceImpl(new WeatherFileRepositoryImpl("test"));
-        weatherDomainService.getDayWithSmallestTempSpread();
+        weatherDomainService.getDayWithSmallestTempSpread(new ArrayList<>());
     }
 }

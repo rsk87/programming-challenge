@@ -7,6 +7,7 @@ package de.exxcellent.challenge.domain;
 
 import de.exxcellent.challenge.domain.exception.FootballDomainException;
 import de.exxcellent.challenge.domain.model.FootballTeam;
+import java.util.List;
 
 /**
  *
@@ -16,8 +17,9 @@ public interface IFootballDomainService {
     
     /**
      * Returns the football team object with the smallest goal distance
+     * @param footballTeamList
      * @return 
      * @throws de.exxcellent.challenge.domain.exception.FootballDomainException 
      */
-    public FootballTeam getTeamWithSmallestGoalDistance() throws FootballDomainException;
+    public FootballTeam getTeamWithSmallestGoalDistance(List<FootballTeam> footballTeamList) throws FootballDomainException;
 }

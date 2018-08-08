@@ -8,7 +8,8 @@ package de.exxcellent.challenge.domain;
 import de.exxcellent.challenge.domain.exception.FootballDomainException;
 import de.exxcellent.challenge.domain.impl.FootballDomainServiceImpl;
 import de.exxcellent.challenge.domain.model.FootballTeam;
-import de.exxcellent.challenge.repository.impl.FootballFileRepositoryImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,14 +20,12 @@ import org.junit.Test;
  */
 public class FootballDomainTest {
     
-    private static final String FOOTBALL_CSV_FILE_NAME = "de/exxcellent/challenge/football.csv";
-    
     private IFootballDomainService footballDomainService;
     private FootballTeam footballTeam;
     
     @Before
     public void init() throws FootballDomainException {
-        footballDomainService = new FootballDomainServiceImpl(new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME));
+        footballDomainService = new FootballDomainServiceImpl();
     }
     
     private FootballTeam createFootballTeam(String team, Integer goals, Integer goalsAllowed) throws FootballDomainException {
@@ -58,16 +57,21 @@ public class FootballDomainTest {
     
     @Test
     public void testGetTeamWithSmallestGoalDistance() throws FootballDomainException {
-        FootballTeam expectedResult = createFootballTeam("Aston_Villa",46,47);
-        Assert.assertEquals(expectedResult.getTeam(), footballDomainService.getTeamWithSmallestGoalDistance().getTeam());
-        Assert.assertEquals(expectedResult.getGoals(), footballDomainService.getTeamWithSmallestGoalDistance().getGoals());
-        Assert.assertEquals(expectedResult.getGoalsAllowed(), footballDomainService.getTeamWithSmallestGoalDistance().getGoalsAllowed());
+        FootballTeam expectedResult = createFootballTeam("FC Bayern München",46,47);
+        
+        List<FootballTeam> actualList = new ArrayList<>();
+        actualList.add(createFootballTeam("Eintracht Frankfurt",58,32));
+        actualList.add(createFootballTeam("Darmstadt 98",30,60));
+        actualList.add(expectedResult);
+        
+        FootballTeam actualResult = footballDomainService.getTeamWithSmallestGoalDistance(actualList);
+        Assert.assertEquals(expectedResult.getTeam(), actualResult.getTeam());
+        Assert.assertEquals(expectedResult.getGoals(), actualResult.getGoals());
+        Assert.assertEquals(expectedResult.getGoalsAllowed(), actualResult.getGoalsAllowed());
     }
     
     @Test(expected = FootballDomainException.class)
     public void testGetTeamWithSmallestGoalDistanceEmptyList() throws FootballDomainException {
-        //wrong file
-        footballDomainService = new FootballDomainServiceImpl(new FootballFileRepositoryImpl("test"));
-        footballDomainService.getTeamWithSmallestGoalDistance();
+        footballDomainService.getTeamWithSmallestGoalDistance(new ArrayList<>());
     }
 }

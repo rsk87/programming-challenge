@@ -22,7 +22,7 @@ public class WeatherApplicationServiceImpl implements IWeatherApplicationService
 
     public WeatherApplicationServiceImpl(IWeatherRepository pWeatherRepository) {
         this.weatherRepository = pWeatherRepository;
-        this.weatherDomainService = new WeatherDomainServiceImpl(weatherRepository);
+        this.weatherDomainService = new WeatherDomainServiceImpl();
     }
 
     /**
@@ -32,6 +32,7 @@ public class WeatherApplicationServiceImpl implements IWeatherApplicationService
      */
     @Override
     public String getDayWithSmallestTempSpread() throws WeatherDomainException {
-        return weatherDomainService.getDayWithSmallestTempSpread().getDay();
+        return weatherDomainService.getDayWithSmallestTempSpread(
+                weatherRepository.findAllWeatherData()).getDay();
     }
 }

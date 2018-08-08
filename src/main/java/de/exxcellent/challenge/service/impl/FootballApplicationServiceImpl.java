@@ -22,7 +22,7 @@ public class FootballApplicationServiceImpl implements IFootballApplicationServi
 
     public FootballApplicationServiceImpl(IFootballRepository pFootballRepository) {
         this.footballRepository = pFootballRepository;
-        this.footballDomainService = new FootballDomainServiceImpl(footballRepository);
+        this.footballDomainService = new FootballDomainServiceImpl();
     }
 
     /**
@@ -32,6 +32,7 @@ public class FootballApplicationServiceImpl implements IFootballApplicationServi
      */
     @Override
     public String getTeamWithSmallestGoalDistance() throws FootballDomainException {
-        return footballDomainService.getTeamWithSmallestGoalDistance().getTeam();
+        return footballDomainService.getTeamWithSmallestGoalDistance(
+                footballRepository.findAllFootballData()).getTeam();
     }
 }

@@ -6,7 +6,6 @@
 package de.exxcellent.challenge.domain.impl;
 
 import de.exxcellent.challenge.domain.IFootballDomainService;
-import de.exxcellent.challenge.domain.IFootballRepository;
 import de.exxcellent.challenge.domain.exception.FootballDomainException;
 import de.exxcellent.challenge.domain.model.FootballTeam;
 import java.util.List;
@@ -17,20 +16,13 @@ import java.util.List;
  */
 public class FootballDomainServiceImpl implements IFootballDomainService {
 
-    private IFootballRepository footballRepository;
-
-    public FootballDomainServiceImpl(IFootballRepository pFootballRepository) {
-        this.footballRepository = pFootballRepository;
-    }
-
     /**
      * 
      * @return the footbal team object with the smallest goal distance
      * @throws FootballDomainException 
      */
     @Override
-    public FootballTeam getTeamWithSmallestGoalDistance() throws FootballDomainException {
-        List<FootballTeam> footballTeamList = footballRepository.findAllFootballData();
+    public FootballTeam getTeamWithSmallestGoalDistance(List<FootballTeam> footballTeamList) throws FootballDomainException {
         
         if(footballTeamList == null || footballTeamList.isEmpty()) {
             throw new FootballDomainException("The given list of football teams is null or empty");

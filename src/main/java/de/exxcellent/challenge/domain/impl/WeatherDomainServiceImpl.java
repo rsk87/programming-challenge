@@ -6,7 +6,6 @@
 package de.exxcellent.challenge.domain.impl;
 
 import de.exxcellent.challenge.domain.IWeatherDomainService;
-import de.exxcellent.challenge.domain.IWeatherRepository;
 import de.exxcellent.challenge.domain.exception.WeatherDomainException;
 import de.exxcellent.challenge.domain.model.DailyWeather;
 import java.util.List;
@@ -17,10 +16,7 @@ import java.util.List;
  */
 public class WeatherDomainServiceImpl implements IWeatherDomainService {
 
-    private IWeatherRepository weatherRepository;
-
-    public WeatherDomainServiceImpl(IWeatherRepository pWeatherRepository) {
-        this.weatherRepository = pWeatherRepository;
+    public WeatherDomainServiceImpl() {
     }
     
     /**
@@ -29,9 +25,7 @@ public class WeatherDomainServiceImpl implements IWeatherDomainService {
      * @throws WeatherDomainException 
      */
     @Override
-    public DailyWeather getDayWithSmallestTempSpread() throws WeatherDomainException {
-        
-        List<DailyWeather> dailyWeatherList = weatherRepository.findAllWeatherData();
+    public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList) throws WeatherDomainException {
         
         if(dailyWeatherList == null || dailyWeatherList.isEmpty()) {
             throw new WeatherDomainException("The given list of daily weather is null or empty");

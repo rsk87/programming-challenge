@@ -77,6 +77,7 @@ public class WeatherFileRepositoryImpl extends BaseFileRepository implements IWe
                 .forEach(line -> {
                 try {
                     result.add(new DailyWeather(line.get(COLUMN_DAY),Integer.parseInt(line.get(COLUMN_MXT)),Integer.parseInt(line.get(COLUMN_MNT))));
+                //better solution -> addional mapping class
                 } catch (WeatherDomainException ex) {
                     throw new IllegalArgumentException(ex.getMessage(),ex);
                 }
