@@ -5,7 +5,7 @@
  */
 package de.exxcellent.challenge.domain;
 
-import de.exxcellent.challenge.domain.exception.FootballDomainException;
+import de.exxcellent.challenge.domain.exception.FootballException;
 import de.exxcellent.challenge.domain.impl.FootballDomainServiceImpl;
 import de.exxcellent.challenge.domain.model.FootballTeam;
 import java.util.ArrayList;
@@ -24,39 +24,39 @@ public class FootballDomainTest {
     private FootballTeam footballTeam;
     
     @Before
-    public void init() throws FootballDomainException {
+    public void init() throws FootballException {
         footballDomainService = new FootballDomainServiceImpl();
     }
     
-    private FootballTeam createFootballTeam(String team, Integer goals, Integer goalsAllowed) throws FootballDomainException {
+    private FootballTeam createFootballTeam(String team, Integer goals, Integer goalsAllowed) throws FootballException {
         return new FootballTeam(team,goals,goalsAllowed);
     }
     
     @Test
-    public void testBaseConstruction() throws FootballDomainException {
+    public void testBaseConstruction() throws FootballException {
         footballTeam = createFootballTeam("Eintracht Frankfurt",58,32);
         Assert.assertEquals("Eintracht Frankfurt", footballTeam.getTeam());
         Assert.assertEquals(new Integer(58), footballTeam.getGoals());
         Assert.assertEquals(new Integer(32), footballTeam.getGoalsAllowed());
     }
     
-    @Test(expected = FootballDomainException.class)
-    public void testGoalsValueIsNull() throws FootballDomainException {
+    @Test(expected = FootballException.class)
+    public void testGoalsValueIsNull() throws FootballException {
         footballTeam = createFootballTeam("Eintracht Frankfurt",null,15);
     }
     
-    @Test(expected = FootballDomainException.class)
-    public void testGoalsAllowedValueIsNull() throws FootballDomainException {
+    @Test(expected = FootballException.class)
+    public void testGoalsAllowedValueIsNull() throws FootballException {
         footballTeam = createFootballTeam("Eintracht Frankfurt",30,null);
     }
     
-    @Test(expected = FootballDomainException.class)
-    public void testTeamIsNull() throws FootballDomainException {
+    @Test(expected = FootballException.class)
+    public void testTeamIsNull() throws FootballException {
         footballTeam = createFootballTeam(null,30,15);
     }
     
     @Test
-    public void testGetTeamWithSmallestGoalDistance() throws FootballDomainException {
+    public void testGetTeamWithSmallestGoalDistance() throws FootballException {
         FootballTeam expectedResult = createFootballTeam("FC Bayern München",46,47);
         
         List<FootballTeam> actualList = new ArrayList<>();
@@ -70,8 +70,8 @@ public class FootballDomainTest {
         Assert.assertEquals(expectedResult.getGoalsAllowed(), actualResult.getGoalsAllowed());
     }
     
-    @Test(expected = FootballDomainException.class)
-    public void testGetTeamWithSmallestGoalDistanceEmptyList() throws FootballDomainException {
+    @Test(expected = FootballException.class)
+    public void testGetTeamWithSmallestGoalDistanceEmptyList() throws FootballException {
         footballDomainService.getTeamWithSmallestGoalDistance(new ArrayList<>());
     }
 }

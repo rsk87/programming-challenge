@@ -9,7 +9,7 @@ package de.exxcellent.challenge.domain.exception;
  *
  * @author c.kaddatz
  */
-public class FootballDomainException extends Exception {
+public class FootballException extends Exception {
     
     /**
      * Constructs a new FootballDomainException instance and set's the
@@ -17,7 +17,7 @@ public class FootballDomainException extends Exception {
      *
      * @param message
      */
-    public FootballDomainException(String message)
+    public FootballException(String message)
     {
         super(message);
     }
@@ -29,7 +29,7 @@ public class FootballDomainException extends Exception {
      * @param message
      * @param cause
      */
-    public FootballDomainException(String message, Throwable cause)
+    public FootballException(String message, Throwable cause)
     {
         super(message, cause);
     }

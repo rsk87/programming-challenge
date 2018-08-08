@@ -7,7 +7,7 @@ package de.exxcellent.challenge.service.impl;
 
 import de.exxcellent.challenge.domain.IFootballDomainService;
 import de.exxcellent.challenge.domain.IFootballRepository;
-import de.exxcellent.challenge.domain.exception.FootballDomainException;
+import de.exxcellent.challenge.domain.exception.FootballException;
 import de.exxcellent.challenge.domain.impl.FootballDomainServiceImpl;
 import de.exxcellent.challenge.service.IFootballApplicationService;
 
@@ -28,10 +28,10 @@ public class FootballApplicationServiceImpl implements IFootballApplicationServi
     /**
      * 
      * @return football team with the smallest goal distance as string
-     * @throws FootballDomainException 
+     * @throws FootballException 
      */
     @Override
-    public String getTeamWithSmallestGoalDistance() throws FootballDomainException {
+    public String getTeamWithSmallestGoalDistance() throws FootballException {
         return footballDomainService.getTeamWithSmallestGoalDistance(
                 footballRepository.findAllFootballData()).getTeam();
     }

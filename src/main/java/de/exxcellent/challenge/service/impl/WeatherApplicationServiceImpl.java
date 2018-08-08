@@ -7,7 +7,7 @@ package de.exxcellent.challenge.service.impl;
 
 import de.exxcellent.challenge.domain.IWeatherDomainService;
 import de.exxcellent.challenge.domain.IWeatherRepository;
-import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.exception.WeatherException;
 import de.exxcellent.challenge.domain.impl.WeatherDomainServiceImpl;
 import de.exxcellent.challenge.service.IWeatherApplicationService;
 
@@ -28,10 +28,10 @@ public class WeatherApplicationServiceImpl implements IWeatherApplicationService
     /**
      * 
      * @return day with the smallest temperature as string
-     * @throws WeatherDomainException 
+     * @throws WeatherException 
      */
     @Override
-    public String getDayWithSmallestTempSpread() throws WeatherDomainException {
+    public String getDayWithSmallestTempSpread() throws WeatherException {
         return weatherDomainService.getDayWithSmallestTempSpread(
                 weatherRepository.findAllWeatherData()).getDay();
     }

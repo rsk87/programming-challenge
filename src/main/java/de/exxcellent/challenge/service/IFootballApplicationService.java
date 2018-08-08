@@ -5,7 +5,7 @@
  */
 package de.exxcellent.challenge.service;
 
-import de.exxcellent.challenge.domain.exception.FootballDomainException;
+import de.exxcellent.challenge.domain.exception.FootballException;
 
 /**
  *
@@ -16,7 +16,7 @@ public interface IFootballApplicationService {
     /**
      * 
      * @return football team with the smallest goal distance as string
-     * @throws FootballDomainException 
+     * @throws FootballException 
      */
-    public String getTeamWithSmallestGoalDistance() throws FootballDomainException;
+    public String getTeamWithSmallestGoalDistance() throws FootballException;
 }

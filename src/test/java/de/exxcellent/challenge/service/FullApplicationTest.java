@@ -5,8 +5,8 @@
  */
 package de.exxcellent.challenge.service;
 
-import de.exxcellent.challenge.domain.exception.FootballDomainException;
-import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.exception.FootballException;
+import de.exxcellent.challenge.domain.exception.WeatherException;
 import de.exxcellent.challenge.repository.impl.FootballFileRepositoryImpl;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import de.exxcellent.challenge.service.impl.FootballApplicationServiceImpl;
@@ -27,7 +27,7 @@ public class FullApplicationTest {
     private String expectedResult;
     
     @Before
-    public void init() throws WeatherDomainException, FootballDomainException {
+    public void init() throws WeatherException, FootballException {
         final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
         final String FOOTBALL_CSV_FILE_NAME = "de/exxcellent/challenge/football.csv";
         final String DEFAULT_CSV_DELIMITER = ",";
@@ -36,13 +36,13 @@ public class FullApplicationTest {
     }
     
     @Test
-    public void testDayWithSmallestTempSpread() throws WeatherDomainException {
+    public void testDayWithSmallestTempSpread() throws WeatherException {
         expectedResult = "14";
         Assert.assertEquals(expectedResult, weatherService.getDayWithSmallestTempSpread()); 
     }
     
     @Test
-    public void testTeamWithSmallestGoalDistance() throws FootballDomainException {
+    public void testTeamWithSmallestGoalDistance() throws FootballException {
         expectedResult = "Aston_Villa";
         Assert.assertEquals(expectedResult, footballService.getTeamWithSmallestGoalDistance()); 
     }

@@ -5,7 +5,7 @@
  */
 package de.exxcellent.challenge.domain;
 
-import de.exxcellent.challenge.domain.exception.FootballDomainException;
+import de.exxcellent.challenge.domain.exception.FootballException;
 import de.exxcellent.challenge.domain.model.FootballTeam;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface IFootballRepository {
      * at the domain service it can be coverted to domain model
      * it has more flexibility
      * @return list of found football team objects 
-     * @throws de.exxcellent.challenge.domain.exception.FootballDomainException 
+     * @throws de.exxcellent.challenge.domain.exception.FootballException 
      */
-    public List<FootballTeam> findAllFootballData() throws FootballDomainException;
+    public List<FootballTeam> findAllFootballData() throws FootballException;
 }

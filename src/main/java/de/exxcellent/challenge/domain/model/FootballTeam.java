@@ -5,7 +5,7 @@
  */
 package de.exxcellent.challenge.domain.model;
 
-import de.exxcellent.challenge.domain.exception.FootballDomainException;
+import de.exxcellent.challenge.domain.exception.FootballException;
 
 /**
  *
@@ -18,18 +18,18 @@ public class FootballTeam {
     private Integer goalsAllowed;
     private Integer absoluteGoalDifference;
 
-    public FootballTeam(String pTeam, Integer pGoals, Integer pGoalsAllowed) throws FootballDomainException {
+    public FootballTeam(String pTeam, Integer pGoals, Integer pGoalsAllowed) throws FootballException {
         
         if(pTeam == null) {
-            throw new FootballDomainException("Football team parameter 'team' is null");
+            throw new FootballException("Football team parameter 'team' is null");
         }
         
         if(pGoals == null) {
-            throw new FootballDomainException("Football team parameter 'goals' is null");
+            throw new FootballException("Football team parameter 'goals' is null");
         }
         
         if(pGoalsAllowed == null) {
-            throw new FootballDomainException("Football team parameter 'goalsAllowed' is null");
+            throw new FootballException("Football team parameter 'goalsAllowed' is null");
         }
         
         this.team = pTeam;

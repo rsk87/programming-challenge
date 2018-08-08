@@ -1,7 +1,7 @@
 package de.exxcellent.challenge;
 
-import de.exxcellent.challenge.domain.exception.FootballDomainException;
-import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.exception.FootballException;
+import de.exxcellent.challenge.domain.exception.WeatherException;
 import de.exxcellent.challenge.repository.impl.FootballFileRepositoryImpl;
 import de.exxcellent.challenge.repository.impl.WeatherFileRepositoryImpl;
 import de.exxcellent.challenge.service.IFootballApplicationService;
@@ -19,12 +19,12 @@ public final class App {
     
     private static final String WEATHER_CSV_FILE_NAME = "de/exxcellent/challenge/weather.csv";
     private static final String FOOTBALL_CSV_FILE_NAME = "de/exxcellent/challenge/football.csv";
-    private static final String DEFAULT_CSV_DELIMITER = ",";
+    //private static final String DEFAULT_CSV_DELIMITER = ",";
 
-    public static void main(String... args) throws WeatherDomainException, FootballDomainException {
+    public static void main(String... args) throws WeatherException, FootballException {
         
-        IWeatherApplicationService weatherService = new WeatherApplicationServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
-        IFootballApplicationService footballService = new FootballApplicationServiceImpl(new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME, DEFAULT_CSV_DELIMITER));
+        IWeatherApplicationService weatherService = new WeatherApplicationServiceImpl(new WeatherFileRepositoryImpl(WEATHER_CSV_FILE_NAME));
+        IFootballApplicationService footballService = new FootballApplicationServiceImpl(new FootballFileRepositoryImpl(FOOTBALL_CSV_FILE_NAME));
 
         String dayWithSmallestTempSpread = weatherService.getDayWithSmallestTempSpread();     // Your day analysis function call …
         String teamWithSmallesGoalSpread = footballService.getTeamWithSmallestGoalDistance(); // Your goal analysis function call …

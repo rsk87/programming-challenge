@@ -5,7 +5,7 @@
  */
 package de.exxcellent.challenge.domain;
 
-import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.exception.WeatherException;
 import de.exxcellent.challenge.domain.model.DailyWeather;
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface IWeatherDomainService {
      * Returns the daily weather object with the smallest temperature spread
      * @param dailyWeatherList
      * @return 
-     * @throws de.exxcellent.challenge.domain.exception.WeatherDomainException 
+     * @throws de.exxcellent.challenge.domain.exception.WeatherException 
      */
-    public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList) throws WeatherDomainException ;
+    public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList) throws WeatherException ;
 }

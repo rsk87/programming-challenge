@@ -9,7 +9,7 @@ package de.exxcellent.challenge.domain.exception;
  *
  * @author c.kaddatz
  */
-public class WeatherDomainException extends Exception {
+public class WeatherException extends Exception {
     
     /**
      * Constructs a new WeatherDomainServiceException instance and set's the
@@ -17,7 +17,7 @@ public class WeatherDomainException extends Exception {
      *
      * @param message
      */
-    public WeatherDomainException(String message)
+    public WeatherException(String message)
     {
         super(message);
     }
@@ -29,7 +29,7 @@ public class WeatherDomainException extends Exception {
      * @param message
      * @param cause
      */
-    public WeatherDomainException(String message, Throwable cause)
+    public WeatherException(String message, Throwable cause)
     {
         super(message, cause);
     }

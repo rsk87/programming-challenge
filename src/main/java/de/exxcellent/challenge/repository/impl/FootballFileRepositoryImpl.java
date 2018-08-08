@@ -6,7 +6,7 @@
 package de.exxcellent.challenge.repository.impl;
 
 import de.exxcellent.challenge.domain.IFootballRepository;
-import de.exxcellent.challenge.domain.exception.FootballDomainException;
+import de.exxcellent.challenge.domain.exception.FootballException;
 import de.exxcellent.challenge.domain.model.FootballTeam;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -28,49 +28,49 @@ public class FootballFileRepositoryImpl extends BaseFileRepository implements IF
     
     /**
      * @param pFileName csv file name
-     * @throws de.exxcellent.challenge.domain.exception.FootballDomainException
+     * @throws de.exxcellent.challenge.domain.exception.FootballException
      */
-    public FootballFileRepositoryImpl(String pFileName) throws FootballDomainException {
+    public FootballFileRepositoryImpl(String pFileName) throws FootballException {
         
         super(pFileName, null);
         
         if(pFileName == null) {
-            throw new FootballDomainException("FootballFileRepository parameter 'filename' is null");
+            throw new FootballException("FootballFileRepository parameter 'filename' is null");
         }
     }
     
     /**
      * @param pFileName csv file name
      * @param pDelimiter csv delimiter (optional)
-     * @throws de.exxcellent.challenge.domain.exception.FootballDomainException
+     * @throws de.exxcellent.challenge.domain.exception.FootballException
      */
-    public FootballFileRepositoryImpl(String pFileName, String pDelimiter) throws FootballDomainException {
+    public FootballFileRepositoryImpl(String pFileName, String pDelimiter) throws FootballException {
         
         super(pFileName, pDelimiter);
         
         if(pFileName == null) {
-            throw new FootballDomainException("FootballFileRepository parameter 'filename' is null");
+            throw new FootballException("FootballFileRepository parameter 'filename' is null");
         }
     }
 
     /**
      * Read football team csv file and mapping the data to domain model
      * @return a list from mapped football team data
-     * @throws FootballDomainException 
+     * @throws FootballException 
      */
     @Override
-    public List<FootballTeam> findAllFootballData() throws FootballDomainException {
+    public List<FootballTeam> findAllFootballData() throws FootballException {
         List<FootballTeam> result = new ArrayList<>();
         
         URL fileUrl = getFileUrl();
         if(fileUrl == null) {
-            throw new FootballDomainException("File with name " + fileName + " not found");
+            throw new FootballException("File with name " + fileName + " not found");
         }
 
         try {
             
             if(!isDelimiterExisting(fileUrl)) {
-                throw new FootballDomainException("File with name " + fileName + " not contains delimiter '" + delimiter + "'");
+                throw new FootballException("File with name " + fileName + " not contains delimiter '" + delimiter + "'");
             }
             
             readCSVFile(fileUrl, Arrays.asList(COLUMN_TEAM,COLUMN_GOALS,COLUMN_GOALS_ALLOWED))
@@ -78,13 +78,13 @@ public class FootballFileRepositoryImpl extends BaseFileRepository implements IF
                 try {
                     result.add(new FootballTeam(line.get(COLUMN_TEAM),Integer.parseInt(line.get(COLUMN_GOALS)),Integer.parseInt(line.get(COLUMN_GOALS_ALLOWED))));
                 //find better solution -> addional mapping class
-                } catch (FootballDomainException ex) {
+                } catch (FootballException ex) {
                     throw new IllegalArgumentException(ex.getMessage(),ex);
                 }
             });
             
         } catch (URISyntaxException | IOException ex) {
-            throw new FootballDomainException("Error while reading file with name " + fileName, ex);
+            throw new FootballException("Error while reading file with name " + fileName, ex);
         }        
         return result;
     }

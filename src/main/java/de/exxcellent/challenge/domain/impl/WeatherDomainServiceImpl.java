@@ -6,7 +6,7 @@
 package de.exxcellent.challenge.domain.impl;
 
 import de.exxcellent.challenge.domain.IWeatherDomainService;
-import de.exxcellent.challenge.domain.exception.WeatherDomainException;
+import de.exxcellent.challenge.domain.exception.WeatherException;
 import de.exxcellent.challenge.domain.model.DailyWeather;
 import java.util.List;
 
@@ -22,13 +22,13 @@ public class WeatherDomainServiceImpl implements IWeatherDomainService {
     /**
      * 
      * @return the daily weather object with the smallest temperature spread
-     * @throws WeatherDomainException 
+     * @throws WeatherException 
      */
     @Override
-    public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList) throws WeatherDomainException {
+    public DailyWeather getDayWithSmallestTempSpread(List<DailyWeather> dailyWeatherList) throws WeatherException {
         
         if(dailyWeatherList == null || dailyWeatherList.isEmpty()) {
-            throw new WeatherDomainException("The given list of daily weather is null or empty");
+            throw new WeatherException("The given list of daily weather is null or empty");
         }
         
         //sort by temperatureSpread to get the object with the smallest temperatureSpread
